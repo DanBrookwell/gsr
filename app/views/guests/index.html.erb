@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<h1><center>Guest Log</center></h1>
+
+<div class="panel panel-default" style="width:100%;">
+  <div class="panel-heading"><strong>Search Guests</strong></div>
+  <div class="panel-body">
+
+<%= form_tag(guests_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+          <div class="input-append col-sm-10">
+            <div class="row">
+            <div class="col-sm-4">
+              <p><%= text_field_tag :search_first_name, params[:search_first_name], placeholder: "First Name", style: "width:100%;" %></p>
+              <p><%= text_field_tag :search_last_name, params[:search_last_name], placeholder: "Last Name", style: "width:100%;" %></p>
+            </div>
+            <div class="col-sm-4">
+              <p><%= text_field_tag :search_email, params[:search_email], placeholder: "Email Address", style: "width:100%;" %></p>
+              <p><%= text_field_tag :search_phone, params[:search_phone], placeholder: "Phone Number", style: "width:100%;" %></p>
+            </div>
+            <div class="col-sm-4">
+              <p><%= text_field_tag :search_id, params[:search_id], placeholder: "Guest ID (Not Experience ID)", style: "width:100%;" %></p>
+              <div style="text-align:right;">
+              <%= button_tag :submit, :class => "btn btn-success" do %> Search Guests <% end %>
+            </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+</div>
+</div>
+
+<% if !@guests.empty? %>
+
+<table class="table table-hover col-sm-12">
+  <thead>
+    <tr>
+      <th>Guest ID</th>
+      <th>Guest Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Last Updated</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @guests.each do |guest| %>
+      <tr>
+        <td>G-00<%= guest.id %></td>
+        <td><%= guest.first_name %> <%= guest.last_name %></td>
+        <td><%= guest.email %></td>
+        <td><%= guest.phone %></td>
+        <td><%= guest.updated_at.strftime("%m/%d/%Y") %></td>
+        <td style="text-align:right;"><%= link_to 'View Guest Profile', guest, :class => "btn btn-sm btn-success" %> <%= link_to 'Edit', edit_guest_path(guest), :class => "btn btn-sm btn-default" %> <%= link_to 'Destroy', guest, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>
+  <h3>No Guest Record Found</h3>
+  <p>A guest record has not been found with this information.  If you are sure the inputted information is correct, click the button below to add a new guest record.</p>
+
+  <p><%= link_to new_guest_path, :class => "btn btn-success navbar-btn", :id => "newGuest" do %><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Add New Entry<% end %></p>
+
+<% end %>

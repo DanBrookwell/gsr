@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Experience Entries</h1>
+
+<div class="panel panel-default" style="width:100%;">
+  <div class="panel-heading"><strong>Search Experiences</strong></div>
+  <div class="panel-body">
+
+<%= form_tag(experiences_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+          <div class="input-append col-sm-10">
+            <div class="row">
+            <div class="col-sm-12">
+              <p><%= text_field_tag :search_experiences, params[:search_experiences], placeholder: "Experience ID Number", style: "width:65%;" %>   <%= button_tag :submit, :class => "btn btn-success" do %> Search Experiences <% end %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+</div>
+</div>
+
+<table class="table table-hover col-sm-12">
+  <thead>
+    <tr>
+      <th>#:</th>
+      <th>Details</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @experiences.each do |experience| %>
+      <tr>
+        <td>E-00<%= experience.id %></td>
+        <td><%= experience.details %></td>
+        <td style="text-align:right;"><%= link_to 'View Experience Details', [experience.guest, experience], :class => "btn btn-sm btn-success"  %> <%= link_to 'Edit', edit_guest_experience_path(experience.guest, experience), :class => "btn btn-sm btn-default"  %> <%= link_to 'Destroy', [experience.guest, experience], method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-sm btn-danger"  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

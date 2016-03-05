@@ -1,0 +1,25 @@
+<%= form_for([@experience.guest, @experience]) do |f| %>
+  <% if @experience.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@experience.errors.count, "error") %> prohibited this experience from being saved:</h2>
+
+      <ul>
+      <% @experience.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :details %><br>
+    <%= f.text_area :details %>
+  </div>
+  <div class="field">
+    <%= f.label "Guest ID Number:" %><br>
+    G-00<%= @experience.guest_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

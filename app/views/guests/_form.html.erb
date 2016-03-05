@@ -1,0 +1,46 @@
+<%= form_for @guest, :html => {:id => "guest-input"} do |f| %>
+<% if @guest.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@guest.errors.count, "error") %> prohibited this guest from being saved:</h2>
+
+  <ul>
+    <% @guest.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-4">
+    <p><label for="inputEmail3" class="control-label">First Name:</label><br />
+      <%= f.text_field :first_name, style: "width:100%;"  %></p>
+      <p><label for="inputEmail3" class="control-label">Last Name:</label><br />
+        <%= f.text_field :last_name, style: "width:100%;" %></p>
+      </div>
+
+      <div class="col-sm-4">
+        <p><label for="inputEmail3" class="control-label">Email Address:</label><br />
+          <%= f.text_field :email, style: "width:100%;" %></p>
+          <p><label for="inputEmail3" class="control-label">Phone Number:</label><br />
+            <%= f.text_field :phone, style: "width:100%;" %></p>
+          </div>
+
+          <div class="col-sm-4">
+            <p><label for="inputEmail3" class="control-label">Street Address:</label><br />
+              <%= f.text_field :street_address, style: "width:100%;" %></p>
+              <p><label for="inputEmail3" class="control-label">City:</label><br />
+                <%= f.text_field :city, style: "width:100%;" %></p>
+                <p><label for="inputEmail3" class="control-label">State:</label><br />
+                  <%= f.text_field :state, style: "width:100%;" %></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12" style="text-align:right;">
+                  <%= f.button :submit, :class => "btn btn-success" do %>
+                    Create guest
+                  <% end %>
+                </div>
+              </div>
+
+              <% end %>
