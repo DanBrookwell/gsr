@@ -4,6 +4,7 @@ class GuestsController < ApplicationController
   # GET /guests
   # GET /guests.json
   def index
+    @guest = Guest.new
     @guests = Guest.all
     if params[:search_first_name].present?
       @guests = Guest.search_first_name(params[:search_first_name])
